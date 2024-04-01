@@ -1,0 +1,20 @@
+.movieCardRoot {
+  width: 172px;
+  height: 260px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  transition: 0.2s;
+  border: 3px solid transparent;
+}
+
+.movieCardRoot:hover {
+  cursor: pointer;
+  border: 3px solid #b76d68;
+}
+
+.movieCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

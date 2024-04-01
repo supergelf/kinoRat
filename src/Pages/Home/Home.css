@@ -1,0 +1,33 @@
+.homePageWrapper {
+  width: 100vw;
+  margin-bottom: 100px;
+}
+
+.homePageRoot {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.homePagePopular {
+  width: 90%;
+  margin: 0 auto 40px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.homePagePopularTitle {
+  width: 100%;
+  border-bottom: 1px solid;
+  padding-bottom: 8px;
+  font-size: 18px;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.homePagePopularMovieRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

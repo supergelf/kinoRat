@@ -1,0 +1,248 @@
+.searchPageWrapper {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.searchPageRoot {
+  width: 70%;
+  position: relative;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.searchPageFilterBox {
+  width: 20%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #b9abad86;
+  padding-bottom: 10px;
+}
+
+.searchPageSubTitle {
+  width: 100%;
+  margin: 0;
+  font-weight: 500;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #b9abad86;
+}
+
+.searchPageFilterOptions {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.searchPageFilterOption {
+  margin: 0px;
+  padding: 6px 10px;
+  flex-grow: 1;
+  border-radius: 4px;
+  opacity: 0.6;
+  transition: 0.2s;
+}
+
+.searchPageFilterOption:hover {
+  opacity: 1;
+  cursor: pointer;
+  color: #d6908b;
+}
+
+.searchPageFilterOptionActive {
+  margin: 0px;
+  padding: 6px 10px;
+  flex-grow: 1;
+  background-color: #1b2432;
+  border-radius: 4px;
+  opacity: 1;
+}
+
+.searchPageFilterOptionActive:hover {
+  cursor: pointer;
+}
+
+.searchPageMoviesBox {
+  width: 75%;
+}
+
+.searchPageMovies {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.searchPageFilm {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #b9abad3c;
+}
+
+.searchPageFilmPosterWrapper {
+  width: 140px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 3px solid transparent;
+  transition: 0.2s;
+  flex-shrink: 0;
+}
+
+.searchPageFilmPosterWrapper:hover {
+  cursor: pointer;
+  border: 3px solid #b76d68;
+}
+
+.searchPageFilmPoster {
+  width: 100%;
+  height: 100%;
+}
+
+.searchPageFilmInfoBox {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.searchPageFilmInfoTitle {
+  width: fit-content;
+  height: fit-content;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  margin: 5px 20px;
+  transition: 0.08s;
+}
+
+.searchPageFilmInfoTitle:hover {
+  cursor: pointer;
+  color: #b76d68;
+}
+
+.searchPageFilmReleaseDate {
+  margin: 0px 20px;
+  font-weight: 500;
+  opacity: 0.6;
+  font-size: 18px;
+}
+
+.searchPageFilmOrigTitle {
+  margin: 5px 20px;
+  opacity: 0.6;
+}
+
+.searchPageFilmGenreBox {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin: 10px 20px;
+  flex-grow: 1;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.searchPageFilmGenre {
+  margin: 0px;
+  background-color: #b76d68;
+  padding: 2px 6px 3px 6px;
+  border-radius: 4px;
+}
+
+.searchPagePeople {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  gap: 15px;
+}
+
+.searchPagePerson {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #b9abad3c;
+}
+
+.searchPagePersonImageWrapper {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 3px solid transparent;
+  transition: 0.2s;
+  flex-shrink: 0;
+}
+
+.searchPagePersonImageWrapper:hover {
+  cursor: pointer;
+  border: 3px solid #b76d68;
+}
+
+.searchPagePersonImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.searchPagePersonInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchPagePersonName {
+  margin: 0px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 18px;
+  font-weight: 600;
+  transition: 0.08s;
+  width: fit-content;
+}
+
+.searchPagePersonName:hover {
+  cursor: pointer;
+  color: #b76d68;
+}
+
+.searchPagePersonJob {
+  margin: 0px;
+  margin-top: 5px;
+}
+
+.searchPagePersonKnownFor {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  gap: 10px;
+}
+
+.searchPagePersonKnownForText {
+  margin: 0px;
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+.searchPagePersonKnownForFilm {
+  margin: 0px;
+  border-radius: 4px;
+  padding: 2px 6px;
+  background-color: #6d403d;
+  opacity: 0.8;
+  transition: 0.2s;
+}
+
+.searchPagePersonKnownForFilm:hover {
+  cursor: pointer;
+  opacity: 1;
+  background-color: #b76d68;
+}
