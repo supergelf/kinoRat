@@ -14,6 +14,8 @@ function PersonPage() {
   const [personCrewCredits, setPersonCrewCredits] = useState({});
   const [personCastCredits, setPersonCastCredits] = useState({});
 
+  const [genreList, setGenreList] = useState({});
+
   const [activeCreditFilter, setActiveCreditFilter] = useState("...");
   const [activeGenreFilter, setActiveGenreFilter] = useState("Genre");
 
@@ -25,6 +27,8 @@ function PersonPage() {
   const [showBio, setShowBio] = useState(false);
   const [isCreditDropdownShow, setIsCreditDropdownShow] = useState(false);
   const [isSortingDropdownShow, setIsSortingDropDownShow] = useState(false);
+  const [isGenreDropdownShow, setIsGenreDropdownShow] = useState(false);
+
   const [doneLoading, setDoneLoading] = useState(false);
 
   const options = {
@@ -53,6 +57,17 @@ function PersonPage() {
   }, []);
 
   useEffect(() => {
+    let newGenreList = [];
+
+    const urlGenreList = "https://api.themoviedb.org/3/genre/movie/list?language=en";
+    fetch(urlGenreList, options)
+      .then((res) => res.json())
+      .then((json) => {
+        newGenreList = json.genres;
+        console.log(newGenreList);
+      })
+      .catch((err) => console.error("error:" + err));
+
     //Get person movie credits
     const urlCredits = `https://api.themoviedb.org/3/person/${personID}/movie_credits?language=en-US`;
 
@@ -69,6 +84,14 @@ function PersonPage() {
             }
 
             personJobs[cred.job].push(cred);
+
+            cred.genre_ids.forEach((genreId) => {
+              newGenreList.forEach((genre) => {
+                if (Object.values(genre)[0] == genreId && !Object.values(genreList).includes(Object.values(genre)[1])) {
+                  genreList[genreId] = Object.values(genre)[1];
+                }
+              });
+            });
           });
 
           json?.cast.forEach((cred) => {
@@ -77,6 +100,14 @@ function PersonPage() {
             }
 
             personJobs["Actor"].push(cred);
+
+            cred.genre_ids.forEach((genreId) => {
+              newGenreList.forEach((genre) => {
+                if (Object.values(genre)[0] == genreId && !Object.values(genreList).includes(Object.values(genre)[1])) {
+                  genreList[genreId] = Object.values(genre)[1];
+                }
+              });
+            });
           });
 
           console.log(personJobs);
@@ -148,6 +179,7 @@ function PersonPage() {
 
           let sortedJobs = sortFilmsByOption(personJobs[profession], actualActiveSorting);
 
+          setGenreList(genreList);
           setActiveFilms(sortedJobs);
           setActiveCreditFilter(profession);
 
@@ -185,6 +217,20 @@ function PersonPage() {
 
     setActiveFilms(sortedJobs);
     hideCreditDropdown();
+  };
+
+  const changeGenreFilter = (e, genre) => {
+    e.preventDefault();
+    setActiveGenreFilter(genre);
+    hideGenreDropdown();
+  };
+
+  const showGenreDropdown = () => {
+    setIsGenreDropdownShow(true);
+  };
+
+  const hideGenreDropdown = () => {
+    setIsGenreDropdownShow(false);
   };
 
   const hideSortingDropdown = () => {
@@ -279,9 +325,43 @@ function PersonPage() {
             </div>
 
             <div className="personPageFilterRest">
-              <div className="personPageFilterRestBox">
-                <p className="personPageActiveFilter">{activeGenreFilter}</p>
-                <img className="personPageFilterArrow" src={arrowIcon} />
+              <div className="personPageFilterRestBoxGenre">
+                <div className="personPageActiveGenreBox" onClick={showGenreDropdown}>
+                  <p className="personPageActiveFilter">{activeGenreFilter}</p>
+                  <img className="personPageFilterArrow" src={arrowIcon} />
+                </div>
+                <div className={isGenreDropdownShow ? "personPageGenreDropdown" : "personPageGenreDropdownHidden"}>
+                  <div className="personPageGenreFilterActiveBox" onClick={hideGenreDropdown}>
+                    <p className="personPageGenreActiveFilterText">{activeGenreFilter}</p>
+                    <img className="personPageFilterArrow" src={arrowIcon} />
+                  </div>
+                  <p
+                    className={
+                      activeGenreFilter == "Genre"
+                        ? "personPageDropDownGenreOptionActive"
+                        : "personPageDropDownGenreOption"
+                    }
+                    onClick={(e) => changeGenreFilter(e, "Genre")}
+                  >
+                    All genres
+                  </p>
+                  {Object.values(genreList).length != 0 &&
+                    Object.values(genreList).map((genre) => {
+                      return (
+                        <p
+                          className={
+                            activeGenreFilter == genre
+                              ? "personPageDropDownGenreOptionActive"
+                              : "personPageDropDownGenreOption"
+                          }
+                          key={genre}
+                          onClick={(e) => changeGenreFilter(e, genre)}
+                        >
+                          {genre}
+                        </p>
+                      );
+                    })}
+                </div>
               </div>
               <div className="personPageFilterRestBoxSort">
                 <p className="personPageSortBy">Sort by</p>
@@ -298,6 +378,16 @@ function PersonPage() {
                 </div>
 
                 <ul className="personPageSortDropdownOptions">
+                  <li
+                    className={
+                      actualActiveSorting == "Popularity"
+                        ? "personPageSortDropdownOptionActive"
+                        : "personPageSortDropdownOption"
+                    }
+                    onClick={(e) => changeSorting(e, "Popularity", "Popularity")}
+                  >
+                    Popularity
+                  </li>
                   <li
                     className={
                       actualActiveSorting == "Film Name"
@@ -382,16 +472,6 @@ function PersonPage() {
                         Lowest First
                       </li>
                     </ul>
-                  </li>
-                  <li
-                    className={
-                      actualActiveSorting == "Popularity"
-                        ? "personPageSortDropdownOptionActive"
-                        : "personPageSortDropdownOption"
-                    }
-                    onClick={(e) => changeSorting(e, "Popularity", "Popularity")}
-                  >
-                    Popularity
                   </li>
                 </ul>
               </div>
